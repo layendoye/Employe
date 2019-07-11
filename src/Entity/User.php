@@ -20,13 +20,8 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $Login;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
     private $username;
-    
+
     /**
      * @ORM\Column(type="string", length=255)
      */
@@ -35,18 +30,6 @@ class User implements UserInterface
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getLogin(): ?string
-    {
-        return $this->Login;
-    }
-
-    public function setLogin(string $Login): self
-    {
-        $this->Login = $Login;
-
-        return $this;
     }
 
     public function getPassword(): ?string

@@ -5,10 +5,9 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
-class SecuriteController extends AbstractController
-{
+class SecuriteController extends AbstractController{
     /**
-     * @Route("/", name="securite")
+     * @Route("/connexion", name="securite")
      */
     public function index()
     {
@@ -18,8 +17,6 @@ class SecuriteController extends AbstractController
     *@Route("/deconnexion", name="security_logout")
     */
     public function logout(){}
-
-
     /*
     1- Creer une entite User 
     2- Aller dans aller dans config -> packages -> packages -> Security.yaml

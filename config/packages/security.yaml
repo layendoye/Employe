@@ -8,7 +8,7 @@ security:
         in_database: #le nom de notre providers 
             entity: # il doit chercher les informations dans les entités
                 class: App\Entity\User #il doit le chercher dans l'entité User
-                property: Login # il doit aller chercher les Login
+                property: username # il doit aller chercher les Login
 
 
     firewalls:
@@ -22,10 +22,10 @@ security:
             form_login:
                 login_path: securite # c est le nom de notre route dans public function login() sur securityController
                 check_path: securite
-
+            
             logout:
                 path: security_logout
-                target: nouv_employe # nomm de la root nouv_employe
+                target: securite # nomm de la root securite
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#firewalls-authentication

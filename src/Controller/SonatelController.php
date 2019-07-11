@@ -16,16 +16,7 @@ use App\Repository\ServiceRepository;
 class SonatelController extends AbstractController
 {
     /**
-     * @Route("/home", name="home")
-     */
-    public function index()
-    {
-        return $this->render('sonatel/index.html.twig', [
-            'controller_name' => 'SonatelController',
-        ]);
-    }
-    /**
-     *@Route("/sonatel/Nouveau/Employer", name="nouv_employe")
+     *@Route("/", name="nouv_employe")
      *@Route("/sonatel/{id}/Employer/Modifier", name="Modif_employe")
      */
     public function employe(Employe $employe=null,EmployeRepository $repo,Request $requet, ObjectManager $manager){
