@@ -1,0 +1,59 @@
+{% extends "base.html.twig" %} {% form_theme form 'bootstrap_4_layout.html.twig' %}{# on l a ajouter dans twig (dans config packages twig.yaml) #} {% block title %}Employés{% endblock %} {% block body %}
+<div class="form row">
+    <div class="col-md-3"></div>
+    <div class="col-md-6 bor">
+        {{ form_start(form)}}
+        <div class="row espace">
+            {{ form_label(form.Matricule, 'Matricule', {'label_attr': {'class': 'col-2'}}) }} {{form_widget(form.Matricule, {'attr':{'placeholder':'Matricule de l\'employé','class': 'col-9'}}) }}
+        </div>
+        <div class="row espace">
+            {{ form_label(form.Nom, 'Nom', {'label_attr': {'class': 'col-2'}}) }} {{form_widget(form.Nom, {'attr':{'placeholder':'Nom de l\'employé','class': 'col-9'}}) }}
+        </div>
+        <div class="row espace">
+            {{ form_label(form.Naissance, 'Naissance', {'label_attr': {'class': 'col-2'}}) }} {{form_widget(form.Naissance, {'attr':{'class': 'col-9 naissance'}}) }}
+        </div>
+        <div class="row espace">
+            {{ form_label(form.Service, 'Service', {'label_attr': {'class': 'col-2'}}) }} {{form_widget(form.Service, {'attr':{'class': 'col-9'}}) }}
+        </div>
+        <div class="row espace">
+            <div class="col-4"></div>
+            <input type="submit" value="Enregistrer" name="ajouter" class="btn btn-primary col-5 submit">
+        </div>
+        {{form_end(form)}}
+    </div>
+</div>
+<div class="display tableau">
+    <table id="example" class="display" style="width:100%">
+        <thead>
+            <tr>
+                <th>Matricule</th>
+                <th>Nom</th>
+                <th>Date de Naissance</th>
+                <th>Service</th>
+                <th>Modifier</th>
+                <th>Supprimer</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for employe in employes %}
+            <tr>
+                <td>{{employe.Matricule}}</td>
+                <td>{{employe.Nom}}</td>
+                <td>{{employe.Naissance | date('d-m-Y')}}</td>
+                <td>{{employe.Service.Libelle}}</td>
+                <td><a href="{{ path('Modif_employe',{'id': employe.id }) }}"><button class="btn btn-primary">Modifier</button></a></td>
+                <td><button class="btn btn-outline-danger" onclick="supprimer({{employe.id}})">Supprimer</button></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %} {% block javascripts %}
+<script>
+    function supprimer(id) {
+        if (confirm("Comfirmer la suppression ?")) {
+            document.location.href = "/sonatel/" + id + "/Employer/Suprimer";
+        }
+    }
+</script>
+{% endblock %}

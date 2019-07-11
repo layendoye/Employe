@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %} 
+{% block title %}Authentification{% endblock %} 
+{% block body %}    
+    <form action="{{path('securite')}}" method="POST" class="row Auth">
+        <div class="col-3"></div>
+        <div class="row col-5 border left3">
+            <div class="form-group col-12 EspAuth">
+                <input placeholder="Login" type="text" name="_username" {# toujour l'appeler _username #} id="" class="form-control " required>
+            </div>
+            <div class="form-group col-12">
+                <input placeholder="Mot de passe" type="password" name="_password" {# toujour l'appeler _password #} id="" class="form-control" required>
+            </div>
+            
+            <div class="form-group col-11 row">
+                <div class="col-4"></div>
+                <button type="submit" id="" class="btn btn-primary col-6 left3">Connexion</button>
+            </div>
+        </div>
+    </form>
+    
+{% endblock %}

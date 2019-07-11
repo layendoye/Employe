@@ -1,0 +1,40 @@
+.form {
+    margin-top: 5%;
+}
+
+.espace {
+    margin-top: 2%;
+}
+
+.tableau {
+    margin-top: 7%;
+}
+
+.bor {
+    border: 2px solid rgb(109, 109, 109);
+}
+
+.submit {
+    margin-bottom: 2%;
+}
+
+.naissance {
+    padding-left: 0% !important;
+}
+
+th,
+td {
+    text-align: center;
+}
+
+.Auth {
+    margin-top: 15%;
+}
+
+.EspAuth {
+    margin-top: 5%;
+}
+
+.left3 {
+    margin-left: 3%;
+}

@@ -1,0 +1,40 @@
+security:
+    encoders:
+        App\Entity\User:
+            algorithm: bcrypt #pour encoder le mot de passe
+    # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
+    providers:
+        in_memory: { memory: ~ }
+        in_database: #le nom de notre providers 
+            entity: # il doit chercher les informations dans les entités
+                class: App\Entity\User #il doit le chercher dans l'entité User
+                property: Login # il doit aller chercher les Login
+
+
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+        main:
+            anonymous: true
+            provider: in_database  # pour voir le site on doit se connecter et notre provider de reference pour ce connecté est in_database
+
+            form_login:
+                login_path: securite # c est le nom de notre route dans public function login() sur securityController
+                check_path: securite
+
+            logout:
+                path: security_logout
+                target: nouv_employe # nomm de la root nouv_employe
+
+            # activate different ways to authenticate
+            # https://symfony.com/doc/current/security.html#firewalls-authentication
+
+            # https://symfony.com/doc/current/security/impersonating_user.html
+            # switch_user: true
+
+    # Easy way to control access for large sections of your site
+    # Note: Only the *first* access control that matches will be used
+    access_control:
+        # - { path: ^/admin, roles: ROLE_ADMIN }
+        # - { path: ^/profile, roles: ROLE_USER }
