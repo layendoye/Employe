@@ -15,6 +15,7 @@ security:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
+            
         main:
             anonymous: true
             provider: in_database  # pour voir le site on doit se connecter et notre provider de reference pour ce connecté est in_database

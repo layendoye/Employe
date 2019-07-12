@@ -8,6 +8,7 @@
 
 .tableau {
     margin-top: 7%;
+    margin-bottom: 5%;
 }
 
 .bor {
@@ -37,4 +38,8 @@ td {
 
 .left3 {
     margin-left: 3%;
+}
+
+.bgcAuth {
+    background-color: #2C3E50;
 }

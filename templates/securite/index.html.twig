@@ -2,14 +2,14 @@
 {% block title %}Authentification{% endblock %} 
  
     {% block nav %}
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-            <div class="collapse navbar-collapse text-center" id="navbarColor01">Authentification</div>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+            <a class="navbar-brand" href="">Authentification</a>
         </nav>
     {% endblock %}
     {% block body %}
     <form action="{{path('securite')}}" method="POST" class="row Auth">
         <div class="col-3"></div>
-        <div class="row col-5 border left3">
+        <div class="row col-5 border left3 bgcAuth">
             <div class="form-group col-12 EspAuth">
                 <input placeholder="Login" type="text" name="_username" {# toujour l'appeler _username #} id="" class="form-control " required>
             </div>
@@ -19,7 +19,7 @@
             
             <div class="form-group col-11 row">
                 <div class="col-4"></div>
-                <button type="submit" id="" class="btn btn-primary col-6 left3">Connexion</button>
+                <button type="submit" id="" class="btn btn-info col-6 left3">Connexion</button>
             </div>
         </div>
     </form>

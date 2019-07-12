@@ -79,5 +79,10 @@ class SonatelController extends AbstractController
         if($employe) return $this->redirectToRoute("nouv_employe",['employes'=>$lesEmployes]);
         if($service) return $this->redirectToRoute("nouv_service",['services'=>$lesEmployes]);
     }
-    
+    /**
+     * @Route("/sonatel/{id}/Service/Lister", name="Lister")
+     */
+    public function listerService(){
+        
+    }
 }
