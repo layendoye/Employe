@@ -1,0 +1,29 @@
+{% extends "base.html.twig" %} 
+{% block body %}
+    <div class="display tableau">
+    <table id="example" class="display" style="width:100%">
+        <thead>
+            <tr>
+                <th>Matricule</th>
+                <th>Nom</th>
+                <th>Date de Naissance</th>
+                <th>Service</th>
+                <th>Modifier</th>
+                <th>Supprimer</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for employe in EmployesServices %}
+            <tr>
+                <td>{{employe.Matricule}}</td>
+                <td>{{employe.Nom}}</td>
+                <td>{{employe.Naissance | date('d-m-Y')}}</td>
+                <td>{{employe.Service.Libelle}}</td>
+                <td><a href="{{ path('Modif_employe',{'id': employe.id }) }}"><button class="btn btn-primary">Modifier</button></a></td>
+                <td><button class="btn btn-outline-danger" onclick="supprimer({{employe.id}})">Supprimer</button></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

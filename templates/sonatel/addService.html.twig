@@ -1,5 +1,6 @@
 {% extends "base.html.twig" %} 
-{% form_theme form 'bootstrap_4_layout.html.twig' %}{# on l a ajouter dans twig (dans config packages twig.yaml) #} {% block title %}Employés{% endblock %} {% block body %}
+{% form_theme form 'bootstrap_4_layout.html.twig' %}{# on l a ajouter dans twig (dans config packages twig.yaml) #} {% block title %}Employés{% endblock %} 
+{% block body %}
 <div class="form row">
     <div class="col-md-3"></div>
     <div class="col-md-6 bor">
@@ -30,7 +31,7 @@
             <tr>
                 <td>{{service.Libelle}}</td>
                 <td>{{service.employes | length}}</td>
-                <td><a href="{{ path('Modif_service',{'id': service.id }) }}"><button class="btn btn-primary">Lister</button></a></td>
+                <td><a href="{{ path('Lister',{'id': service.id }) }}"><button class="btn btn-primary">Lister</button></a></td>
                 <td><a href="{{ path('Modif_service',{'id': service.id }) }}"><button class="btn btn-primary">Modifier</button></a></td>
                 <td><button class="btn btn-outline-danger" onclick="supprimer({{service.id}})">Supprimer</button></td>
             </tr>
@@ -38,7 +39,8 @@
         </tbody>
     </table>
 </div>
-{% endblock %} {% block javascripts %}
+{% endblock %} 
+{% block javascripts %}
 <script>
     function supprimer(id) {
         if (confirm("Comfirmer la suppression ?")) {

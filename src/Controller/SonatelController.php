@@ -82,7 +82,10 @@ class SonatelController extends AbstractController
     /**
      * @Route("/sonatel/{id}/Service/Lister", name="Lister")
      */
-    public function listerService(){
-        
+    public function listerService(Service $service){
+        $EmployesServices=$service->getEmployes();
+        return $this->render("sonatel/listerEmployeService.html.twig",[
+            'EmployesServices'=>$EmployesServices
+        ]);
     }
 }
