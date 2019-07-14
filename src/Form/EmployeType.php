@@ -18,6 +18,7 @@ class EmployeType extends AbstractType
             ->add('Matricule')
             ->add('Nom')
             ->add('Naissance', DateType::class, ['widget' => 'single_text'])
+            ->add('salaire')
             ->add('Service',EntityType::class,['class'=> Service::class,'choice_label'=>'Libelle'])
         ;
     }

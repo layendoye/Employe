@@ -38,6 +38,11 @@ class Employe
      */
     private $Service;
 
+    /**
+     * @ORM\Column(type="bigint")
+     */
+    private $salaire;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -87,6 +92,18 @@ class Employe
     public function setService(?Service $Service): self
     {
         $this->Service = $Service;
+
+        return $this;
+    }
+
+    public function getSalaire(): ?int
+    {
+        return $this->salaire;
+    }
+
+    public function setSalaire(int $salaire): self
+    {
+        $this->salaire = $salaire;
 
         return $this;
     }

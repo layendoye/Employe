@@ -1,34 +1,57 @@
-{% extends "base.html.twig" %} {% form_theme form 'bootstrap_4_layout.html.twig' %}{# on l a ajouter dans twig (dans config packages twig.yaml) #} {% block title %}Employés{% endblock %} {% block body %}
-<div class="form row">
-    <div class="col-md-3"></div>
-    <div class="col-md-6 bor">
-        {{ form_start(form)}}
-        <div class="row espace">
-            {{ form_label(form.Matricule, 'Matricule', {'label_attr': {'class': 'col-2'}}) }} {{form_widget(form.Matricule, {'attr':{'placeholder':'Matricule de l\'employé','class': 'col-9'}}) }}
+{% extends "base.html.twig" %} 
+{% form_theme form 'bootstrap_4_layout.html.twig' %}{# on l a ajouter dans twig (dans config packages twig.yaml) #} 
+{% block title %}Employés{% endblock %} 
+{% block body %}
+{% if ouvrir %}
+    <div class="form row" id="Monform">
+        <div class="col-md-3"></div>
+        <div class="col-md-6 bor">
+            {{ form_start(form)}}
+            <div class="row espace">
+                {{ form_label(form.Matricule, 'Matricule', {'label_attr': {'class': 'col-2'}}) }} 
+                {{form_widget(form.Matricule, {'attr':{'placeholder':'Matricule de l\'employé','class': 'col-9'}}) }}
+            </div>
+            <div class="row espace">
+                {{ form_label(form.Nom, 'Nom', {'label_attr': {'class': 'col-2'}}) }} 
+                {{form_widget(form.Nom, {'attr':{'placeholder':'Nom de l\'employé','class': 'col-9'}}) }}
+            </div>
+            <div class="row espace">
+                {{ form_label(form.Naissance, 'Naissance', {'label_attr': {'class': 'col-2'}}) }} 
+                {{form_widget(form.Naissance, {'attr':{'class': 'col-9'}}) }}
+            </div>
+            <div class="row espace">
+                {{ form_label(form.salaire, 'salaire', {'label_attr': {'class': 'col-2'}}) }} 
+                {{form_widget(form.salaire, {'attr':{'placeholder':'Salaire','class': 'col-9'}}) }}
+            </div>
+            <div class="row espace">
+                {{ form_label(form.Service, 'Service', {'label_attr': {'class': 'col-2'}}) }} 
+                {{form_widget(form.Service, {'attr':{'class': 'col-9'}}) }}
+            </div>
+            <div class="row espace">
+                <div class="col-4"></div>
+                <input type="submit" value="Enregistrer" name="ajouter" class="btn btn-primary col-5 submit">
+            </div>
+            {{form_end(form)}}
         </div>
-        <div class="row espace">
-            {{ form_label(form.Nom, 'Nom', {'label_attr': {'class': 'col-2'}}) }} {{form_widget(form.Nom, {'attr':{'placeholder':'Nom de l\'employé','class': 'col-9'}}) }}
-        </div>
-        <div class="row espace">
-            {{ form_label(form.Naissance, 'Naissance', {'label_attr': {'class': 'col-2'}}) }} {{form_widget(form.Naissance, {'attr':{'class': 'col-9 naissance'}}) }}
-        </div>
-        <div class="row espace">
-            {{ form_label(form.Service, 'Service', {'label_attr': {'class': 'col-2'}}) }} {{form_widget(form.Service, {'attr':{'class': 'col-9'}}) }}
-        </div>
-        <div class="row espace">
-            <div class="col-4"></div>
-            <input type="submit" value="Enregistrer" name="ajouter" class="btn btn-primary col-5 submit">
-        </div>
-        {{form_end(form)}}
     </div>
-</div>
+{% endif %}
 <div class="display tableau">
+    <div class="row">
+        <div class="col-10"></div>
+        {% if ouvrir == false %}
+            <a href="{{path('Form_employe',{'ouvrir': true })}}" class="col-2 bAjouter"><button class="btn btn-outline-primary col-12">Ajouter</button></a>
+        {% else %}
+            <a href="{{path('nouv_employe')}}" class="col-2 bAjouter"><button class="btn btn-outline-primary col-12">Annuler</button></a>
+        {% endif %}
+    </div>
+
     <table id="example" class="display" style="width:100%">
         <thead>
             <tr>
                 <th>Matricule</th>
                 <th>Nom</th>
                 <th>Date de Naissance</th>
+                <th>Salaire</th>
                 <th>Service</th>
                 <th>Modifier</th>
                 <th>Supprimer</th>
@@ -40,20 +63,27 @@
                 <td>{{employe.Matricule}}</td>
                 <td>{{employe.Nom}}</td>
                 <td>{{employe.Naissance | date('d-m-Y')}}</td>
+                <td>{{employe.salaire |number_format(0, ',', ' ')}}</td>
                 <td>{{employe.Service.Libelle}}</td>
-                <td><a href="{{ path('Modif_employe',{'id': employe.id }) }}"><button class="btn btn-primary">Modifier</button></a></td>
-                <td><button class="btn btn-outline-danger" onclick="supprimer({{employe.id}})">Supprimer</button></td>
+                <td><a href="{{ path('Modif_employe',{'id': employe.id }) }}"><button class="btn btn-primary col-12">Modifier</button></a></td>
+                <td><button class="btn btn-outline-danger col-12" onclick="supprimer({{employe.id}})">Supprimer</button></td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
 </div>
-{% endblock %} {% block javascripts %}
-<script>
-    function supprimer(id) {
-        if (confirm("Comfirmer la suppression ?")) {
-            document.location.href = "/sonatel/" + id + "/Employer/Suprimer";
+{% endblock %} 
+{% block javascripts %}
+    {% if not app.user %}
+        <script>
+            document.location.href="/connexion"
+        </script>
+    {% endif %}
+    <script>
+        function supprimer(id) {
+            if (confirm("Comfirmer la suppression ?")) {
+                document.location.href = "/sonatel/" + id + "/Employer/Suprimer";
+            }
         }
-    }
-</script>
+    </script>
 {% endblock %}

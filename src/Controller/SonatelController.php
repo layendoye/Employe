@@ -18,10 +18,13 @@ class SonatelController extends AbstractController
     /**
      *@Route("/", name="nouv_employe")
      *@Route("/sonatel/{id}/Employer/Modifier", name="Modif_employe")
+     *@Route("/sonatel/Ajouter/Employer/{ouvrir}", name="Form_employe")
      */
-    public function employe(Employe $employe=null,EmployeRepository $repo,Request $requet, ObjectManager $manager){
+    public function employe($ouvrir=false,Employe $employe=null,EmployeRepository $repo,Request $requet, ObjectManager $manager){
         if(!$employe){
             $employe=new Employe();
+        }else{
+            $ouvrir=true;
         }
         $form=$this->createForm(EmployeType::class,$employe);
         $lesEmployes=$repo->findAll();
@@ -35,16 +38,20 @@ class SonatelController extends AbstractController
 
         return $this->render('sonatel/addEmployer.html.twig',[
             'form'=>$form->createView(),
-            'employes'=>$lesEmployes
+            'employes'=>$lesEmployes,
+            'ouvrir'=>$ouvrir
         ]);
     }
     /**
      *@Route("/sonatel/Nouveau/Service", name="nouv_service")
      *@Route("/sonatel/{id}/Service/Modifier", name="Modif_service")
+     *@Route("/sonatel/Ajouter/Service/{ouvrir}", name="Form_service")
      */
-    public function service(Service $service=null,ServiceRepository $repo,Request $requet, ObjectManager $manager){
+    public function service($ouvrir=false,Service $service=null,ServiceRepository $repo,Request $requet, ObjectManager $manager){
         if(!$service){
             $service=new Service();
+        }else{
+            $ouvrir=true;
         }
         $form=$this->createForm(ServiceType::class,$service);
         $lesServices=$repo->findAll();
@@ -58,7 +65,8 @@ class SonatelController extends AbstractController
 
         return $this->render('sonatel/addService.html.twig',[
             'form'=>$form->createView(),
-            'services'=>$lesServices
+            'services'=>$lesServices,
+            'ouvrir'=>$ouvrir
         ]);
     }
     /**

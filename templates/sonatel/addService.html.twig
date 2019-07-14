@@ -1,21 +1,31 @@
 {% extends "base.html.twig" %} 
 {% form_theme form 'bootstrap_4_layout.html.twig' %}{# on l a ajouter dans twig (dans config packages twig.yaml) #} {% block title %}Employés{% endblock %} 
 {% block body %}
-<div class="form row">
-    <div class="col-md-3"></div>
-    <div class="col-md-6 bor">
-        {{ form_start(form)}}
-        <div class="row espace">
-            {{ form_label(form.Libelle, 'Libelle', {'label_attr': {'class': 'col-2'}}) }} {{form_widget(form.Libelle, {'attr':{'placeholder':'Libelle','class': 'col-9'}}) }}
+{% if ouvrir %}
+    <div class="form row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6 bor">
+            {{ form_start(form)}}
+            <div class="row espace">
+                {{ form_label(form.Libelle, 'Libelle', {'label_attr': {'class': 'col-2'}}) }} {{form_widget(form.Libelle, {'attr':{'placeholder':'Libelle','class': 'col-9'}}) }}
+            </div>
+            <div class="row espace">
+                <div class="col-4"></div>
+                <input type="submit" value="Enregistrer" name="ajouter" class="btn btn-primary col-5 submit">
+            </div>
+            {{form_end(form)}}
         </div>
-        <div class="row espace">
-            <div class="col-4"></div>
-            <input type="submit" value="Enregistrer" name="ajouter" class="btn btn-primary col-5 submit">
-        </div>
-        {{form_end(form)}}
     </div>
-</div>
+{% endif %}
 <div class="display tableau">
+<div class="row">
+    <div class="col-10"></div>
+    {% if ouvrir == false %}
+        <a href="{{path('Form_service',{'ouvrir': true })}}" class="col-2 bAjouter"><button class="btn btn-outline-primary col-12 ">Ajouter</button></a>
+    {% else %}
+        <a href="{{path('nouv_service')}}" class="col-2 bAjouter"><button class="btn btn-outline-primary col-12">Annuler</button></a>
+    {% endif %}
+</div>
     <table id="example" class="display" style="width:100%">
         <thead>
             <tr>
@@ -31,9 +41,9 @@
             <tr>
                 <td>{{service.Libelle}}</td>
                 <td>{{service.employes | length}}</td>
-                <td><a href="{{ path('Lister',{'id': service.id }) }}"><button class="btn btn-primary">Lister</button></a></td>
-                <td><a href="{{ path('Modif_service',{'id': service.id }) }}"><button class="btn btn-primary">Modifier</button></a></td>
-                <td><button class="btn btn-outline-danger" onclick="supprimer({{service.id}})">Supprimer</button></td>
+                <td><a href="{{ path('Lister',{'id': service.id }) }}"><button class="btn btn-primary col-10">Lister</button></a></td>
+                <td><a href="{{ path('Modif_service',{'id': service.id }) }}"><button class="btn btn-primary col-10">Modifier</button></a></td>
+                <td><button class="btn btn-outline-danger col-10" onclick="supprimer({{service.id}})">Supprimer</button></td>
             </tr>
             {% endfor %}
         </tbody>
@@ -41,11 +51,16 @@
 </div>
 {% endblock %} 
 {% block javascripts %}
-<script>
-    function supprimer(id) {
-        if (confirm("Comfirmer la suppression ?")) {
-            document.location.href = "/sonatel/" + id + "/Service/Suprimer";
+    {% if not app.user %}
+        <script>
+            document.location.href="/connexion"
+        </script>
+    {% endif %}
+    <script>
+        function supprimer(id) {
+            if (confirm("Comfirmer la suppression ?")) {
+                document.location.href = "/sonatel/" + id + "/Service/Suprimer";
+            }
         }
-    }
-</script>
+    </script>
 {% endblock %}

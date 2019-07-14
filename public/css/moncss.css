@@ -7,8 +7,10 @@
 }
 
 .tableau {
-    margin-top: 7%;
+    margin-top: 5%;
     margin-bottom: 5%;
+    border: 2px solid rgb(109, 109, 109);
+    padding: 2%;
 }
 
 .bor {
@@ -42,4 +44,9 @@ td {
 
 .bgcAuth {
     background-color: #2C3E50;
+}
+
+.bAjouter {
+    padding-left: 0px;
+    margin-bottom: 1%;
 }

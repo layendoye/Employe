@@ -7,7 +7,9 @@ $(document).ready(function() {
         $(table.column(colIdx).nodes()).addClass('highlight');
     });
 });
+
 $('#example').DataTable({
+
     language: {
         processing: "Traitement en cours...",
         search: "Rechercher&nbsp;:",
@@ -23,4 +25,5 @@ $('#example').DataTable({
         aria: { sortAscending: ": activer pour trier la colonne par ordre croissant", sortDescending: ": activer pour trier la colonne par ordre décroissant" }
     }
 });
+
 ///////////////-----------Fin DataTable-------------////
