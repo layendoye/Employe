@@ -9,8 +9,6 @@
 .tableau {
     margin-top: 5%;
     margin-bottom: 5%;
-    border: 2px solid rgb(109, 109, 109);
-    padding: 2%;
 }
 
 .bor {
@@ -49,4 +47,9 @@ td {
 .bAjouter {
     padding-left: 0px;
     margin-bottom: 1%;
+}
+
+.fontAwsModif {
+    font-size: 150%;
+    color: #2c3e50;
 }

@@ -27,11 +27,11 @@ class SecuriteController extends AbstractController{
     */
     public function logout(){}
     /*
-    1- Creer une entite User 
-    2- Aller dans aller dans config -> packages -> packages -> Security.yaml
-    3- gerer l encodage
-    4- gerer les providers
-    5- gerer les form_login et form_logout
-    6- Modifier l'entité en ajoutant implements UserInterface et les 3 dernieres methodes
+        1- Creer une entite User 
+        2- Aller dans aller dans config -> packages -> packages -> Security.yaml
+        3- gerer l encodage
+        4- gerer les providers
+        5- gerer les form_login et form_logout
+        6- Modifier l'entité en ajoutant implements UserInterface et les 3 dernieres methodes
      */
 }

@@ -17,18 +17,24 @@ class SonatelController extends AbstractController
 {
     /**
      *@Route("/", name="nouv_employe")
-     *@Route("/sonatel/{id}/Employer/Modifier", name="Modif_employe")
+     *@Route("/sonatel/Employer/Modifier/{id}", name="Modif_employe")
      *@Route("/sonatel/Ajouter/Employer/{ouvrir}", name="Form_employe")
+     *@Route("/sonatel/Employer/{parService}/{id}", name="Lister")
      */
-    public function employe($ouvrir=false,Employe $employe=null,EmployeRepository $repo,Request $requet, ObjectManager $manager){
+    public function employe($ouvrir=false,Employe $employe=null,EmployeRepository $repo,Request $requet, ObjectManager $manager,Service $service=null,$parService=false){
         if(!$employe){
             $employe=new Employe();
         }else{
             $ouvrir=true;
         }
         $form=$this->createForm(EmployeType::class,$employe);
-        $lesEmployes=$repo->findAll();
-
+        if(!$parService){
+           $lesEmployes=$repo->findAll(); 
+        }
+        else{
+            $lesEmployes=$service->getEmployes();
+        }
+        
         $form->handleRequest($requet);//analyse de la requette (recu apres envoi du formulaire)
         if($form->isSubmitted() && $form->isValid()){
             $manager->persist($employe);
@@ -86,14 +92,5 @@ class SonatelController extends AbstractController
         
         if($employe) return $this->redirectToRoute("nouv_employe",['employes'=>$lesEmployes]);
         if($service) return $this->redirectToRoute("nouv_service",['services'=>$lesEmployes]);
-    }
-    /**
-     * @Route("/sonatel/{id}/Service/Lister", name="Lister")
-     */
-    public function listerService(Service $service){
-        $EmployesServices=$service->getEmployes();
-        return $this->render("sonatel/listerEmployeService.html.twig",[
-            'EmployesServices'=>$EmployesServices
-        ]);
     }
 }

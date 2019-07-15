@@ -45,7 +45,7 @@
         {% endif %}
     </div>
 
-    <table id="example" class="display" style="width:100%">
+    <table id="example" class="display table-bordered" style="width:100%">
         <thead>
             <tr>
                 <th>Matricule</th>
@@ -65,20 +65,17 @@
                 <td>{{employe.Naissance | date('d-m-Y')}}</td>
                 <td>{{employe.salaire |number_format(0, ',', ' ')}}</td>
                 <td>{{employe.Service.Libelle}}</td>
-                <td><a href="{{ path('Modif_employe',{'id': employe.id }) }}"><button class="btn btn-primary col-12">Modifier</button></a></td>
-                <td><button class="btn btn-outline-danger col-12" onclick="supprimer({{employe.id}})">Supprimer</button></td>
+                <td><a href="{{ path('Modif_employe',{'id': employe.id }) }}"><i class="fas fa-user-edit fontAwsModif"></i></a></td>
+                <td><i onclick="supprimer({{employe.id}})" class="fas fa-trash-alt fontAwsModif"></i></td>
             </tr>
+            
+            
             {% endfor %}
         </tbody>
     </table>
 </div>
 {% endblock %} 
 {% block javascripts %}
-    {# {% if not app.user %}
-        <script>
-            document.location.href="/connexion"
-        </script>
-    {% endif %} #}
     <script>
         function supprimer(id) {
             if (confirm("Comfirmer la suppression ?")) {
