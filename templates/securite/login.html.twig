@@ -7,11 +7,14 @@
         </nav>
     {% endblock %}
     {% block body %}
+    <style>
+        .error{color:red}
+    </style>
     <form action="{{path('securite')}}" method="POST" class="row Auth">
         <div class="col-3"></div>
         <div class="row col-5 border left3 bgcAuth">
             <div class="form-group col-12 EspAuth">
-                <input placeholder="Login" type="text" name="_username" {# toujour l'appeler _username #} id="" class="form-control " required>
+                <input placeholder="Login" type="text" value="{{lastUserName}}" name="_username" {# toujour l'appeler _username #} id="" class="form-control " required>
             </div>
             <div class="form-group col-12">
                 <input placeholder="Mot de passe" type="password" name="_password" {# toujour l'appeler _password #} id="" class="form-control" required>
@@ -21,6 +24,9 @@
                 <div class="col-4"></div>
                 <button type="submit" id="" class="btn btn-info col-6 left3">Connexion</button>
             </div>
+            {% if error %}
+                <span class="col-12 text-center error">{{error}}</span>
+            {% endif %}
         </div>
     </form>
     

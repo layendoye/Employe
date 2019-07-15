@@ -51,11 +51,6 @@
 </div>
 {% endblock %} 
 {% block javascripts %}
-    {% if not app.user %}
-        <script>
-            document.location.href="/connexion"
-        </script>
-    {% endif %}
     <script>
         function supprimer(id) {
             if (confirm("Comfirmer la suppression ?")) {
